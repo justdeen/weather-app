@@ -1,0 +1,60 @@
+.alert {
+  margin-top: 1rem;
+  color: rgba(255, 139, 139, 0.95);
+  background-color: rgba(49, 0, 0, 0.54);
+  border: 1px solid rgba(119, 18, 18, 0.95);
+}
+
+
+.btn-close {
+  /* remove bootstrap svg icon */
+  background-image: none !important;
+  background-repeat: none;
+  background-size: auto;
+  background-position: center;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  width: auto;
+  height: auto;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+  font-size: 23px;
+  padding: 15px 15px !important;
+}
+
+.btn-close:hover {
+  color: rgba(255, 139, 139, 1);    
+}
+
+/* ensure any pseudo elements used by bootstrap are hidden */
+.btn-close::before,
+.btn-close::after {
+  display: none !important;
+}
+
+body.light-mode{
+  .alert {
+    color: rgb(139, 0, 0);
+    background-color: rgba(255, 235, 235, 0.54);
+    border: 1px solid rgb(139, 0, 0);
+  }
+  
+  .btn-close {
+    color: inherit;
+  }
+  
+  .btn-close:hover {
+    color: rgb(139, 0, 0);    
+  }
+}
+
+@media (max-width: 400px) {
+  .alert{
+    font-size: 13px;
+  }
+  .btn-close{
+    font-size: 20px;
+  }
+}
