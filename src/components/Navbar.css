@@ -1,0 +1,11 @@
+.navbar-tabs .MuiTab-root{
+    color: var(--tab-color1, white) !important;
+}
+
+.navbar-tabs .MuiTab-root.Mui-selected{
+    color: #4888ffff !important;
+}
+
+.MuiTabs-list{
+    justify-content: center !important;
+}

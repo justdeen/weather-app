@@ -12,7 +12,7 @@ input{
     font-size: 17px;
     border-start-start-radius: 10px;
     border-end-start-radius: 10px;
-    background-color: var(--input-background-color, rgb(59, 59, 59));
+    background-color: var(--input-background-color, rgb(36, 36, 36));
     border: var(--input-border, none);
     box-sizing: var(--input-box-sizing, none);
     color: var(--input-color, white);

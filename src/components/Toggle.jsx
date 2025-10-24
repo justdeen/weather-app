@@ -22,10 +22,8 @@ export default function Toggle() {
       <div style={{marginBottom: '20px', marginTop: '15px', display: 'flex', justifyContent: 'flex-end', paddingRight: '20px'}}>
         <div>
           <MaterialUISwitch checked={checked} onChange={handleChange} id="toggle" />
-          {checked === false && <label for="toggle" style={{color: 'rgb(0, 32, 63)', fontWeight: '500', display: 'block'}}>Light mode</label>}
-          {checked === true && <label for="toggle" style={{color: 'white', fontWeight: '500', display: 'block'}}>Dark mode</label>}
-          {/* {checked === false && <p style={{color: 'rgb(0, 32, 63)', fontWeight: '500'}}>Light mode</p>} */}
-          {/* {checked === true && <p style={{color: 'white', fontWeight: '500'}}>Dark mode</p>} */}
+          {checked === false && <label htmlFor="toggle" style={{color: 'rgb(0, 32, 63)', fontWeight: '500', display: 'block', cursor: 'pointer'}}>Light mode</label>}
+          {checked === true && <label htmlFor="toggle" style={{color: 'white', fontWeight: '500', display: 'block', cursor: 'pointer'}}>Dark mode</label>}
         </div>
       </div>
     );

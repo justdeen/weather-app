@@ -1,0 +1,31 @@
+.container-today{
+    border-radius: 8px;
+    padding: 0px 0px 16px 0px;
+    margin-top: 50px;
+    text-align: center;
+    background-color: var(--container-today-background-color, rgb(0, 32, 63));
+}
+
+.location{
+    color: var(--location-color, white);
+    font-size: 15px;
+    background-color: var(--card-header-background-color, rgba(255, 255, 255, 0.096));
+    padding: 13px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.weatherCondition{
+    color: var(--weatherCondition-color, white);
+}
+
+.temp{
+    color: var(--temp-color, white);
+}
+
+body.light-mode{
+    --container-today-background-color: rgb(231, 231, 231);
+    --container-today-border: 1px solid rgba(0, 31, 63, 0.384);
+    --location-color: rgb(255, 255, 255);
+    --weatherCondition-color: rgb(0, 32, 63);
+    --temp-color: rgb(0, 32, 63);
+}

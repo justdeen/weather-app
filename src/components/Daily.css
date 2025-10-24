@@ -1,0 +1,12 @@
+h2{
+    color: var(--h2-color, white);
+}
+
+.card-header{
+    background-color: var(--card-header-background, rgba(255, 255, 255, 0.096));
+}
+
+body.light-mode{
+    --h2-color: rgb(0, 32, 63);
+    --card-header-background: rgb(0, 32, 63);
+}

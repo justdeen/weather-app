@@ -1,3 +1,16 @@
+.time{
+    text-align: left;
+    color: var(--time-color, white);
+    padding-left: 10px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+body.light-mode{
+    --time-color: rgb(0, 32, 63);
+}
+
 @media (max-width: 400px) {
     p{
         font-size: 14px;

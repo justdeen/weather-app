@@ -1,7 +1,8 @@
-// src/App.jsx
 import React, { useState } from "react";
 import useWeather from "../hooks/useWeather";
-import WeatherCard from "./WeatherCard";
+import Today from "./Today";
+import Hourly from "./Hourly";
+import Daily from "./Daily"
 import Spinner from "./Spinner";
 import ErrorMessage from "./ErrorMessage";
 import './Search.css'
@@ -9,14 +10,9 @@ import './Search.css'
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const MAP_API_KEY = import.meta.env.VITE_MAP_API_KEY;
 
-// const API_KEY = import.meta.env.VITE_OPENWEATHER_KEY;
-// For CRA: process.env.REACT_APP_OPENWEATHER_KEY
-
-export default function App() {
+export default function App({navElements}) {
   const [city, setCity] = useState("");
-  const { data, loading, error, fetchByCity } = useWeather(WEATHER_API_KEY, MAP_API_KEY);
-//   console.log(fetchByCity);
-// fetchByCity("lagos");
+  const { todayData, hourlyData, dailyData, loading, error, fetchByCity } = useWeather(WEATHER_API_KEY, MAP_API_KEY);
   const onSearch = (e) => {
     e.preventDefault();
     if (!city) return;
@@ -41,7 +37,9 @@ export default function App() {
 
       {loading && <Spinner />}
       {error && <ErrorMessage message={error} />}
-      {data[0] && <WeatherCard weather={data} />}
+      {navElements.today === true && todayData[0] && <Today weather={todayData} />}
+      {navElements.hourly === true && hourlyData[0] && <Hourly weather={hourlyData} />}
+      {navElements.daily === true && dailyData[0] && <Daily weather={dailyData} />}
     </div>
   );
 }

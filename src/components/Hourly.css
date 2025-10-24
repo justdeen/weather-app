@@ -1,0 +1,49 @@
+h2{
+    color: var(--h2-color, white);
+}
+
+.info{
+    color: var(--info-color, white);
+}
+
+.hourly-container{
+    margin-top: 50px;
+}
+
+.info{
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.card{
+    background-color: var(--card-background-color, rgb(0, 32, 63));
+    border: var(--card-border, none);
+    color: white;
+    padding: 0px 0px 10px 0px;
+    border-radius: 10px;
+}
+
+.card-body{
+    padding: 8px 16px;
+}
+
+.card-header{
+    border-radius: 10px 10px 0px 0px !important;
+    background-color: var(--card-header-background-color, rgba(255, 255, 255, 0.096));
+    color: var(--card-header-color, #ffffffff);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.card-text{
+    color: var(--card-text-color, white);
+}
+
+body.light-mode{
+    --h2-color: rgb(0, 32, 63);
+    --card-background-color: rgb(231, 231, 231);
+    --card-header-background-color: rgba(0, 20, 39, 1);
+    --card-header-border-bottom: none;
+    --card-header-color: white;
+    --card-text-color: rgb(0, 32, 63);
+}

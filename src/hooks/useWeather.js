@@ -1,10 +1,12 @@
 // src/hooks/useWeather.js
 import { useState, useCallback } from "react";
 
-const BASE = "https://api.weatherapi.com/v1/current.json"; // current weather endpoint
+const BASE = "https://api.weatherapi.com/v1/forecast.json"; // current weather endpoint
 
 export default function useWeather(weatherApi, mapApi) {
-  const [data, setData] = useState([null, null]);
+  const [todayData, setTodayData] = useState([null, null]);
+  const [hourlyData, setHourlyData] = useState([null, null]);
+  const [dailyData, setDailyData] = useState([null, null]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -12,10 +14,12 @@ export default function useWeather(weatherApi, mapApi) {
     if (!city) return;
     setLoading(true);
     setError(null);
-    setData([null, null]);
+    setTodayData([null, null]);
+    setHourlyData([null, null]);
+    setDailyData([null, null]);
 
     try {
-      const res = await fetch(`${BASE}?key=${weatherApi}&q=${city}`);
+      const res = await fetch(`${BASE}?key=${weatherApi}&q=${city}&days=3&aqi=no&alerts=no`);
       if (!res.ok) {
         if (res.status === 404) throw new Error("City not found");
         throw new Error("Failed to fetch");
@@ -31,7 +35,9 @@ export default function useWeather(weatherApi, mapApi) {
         throw new Error("Failed to fetch");
       }
       let mapData = await res2.json();
-      setData([ weatherData, mapData ]);
+      setTodayData([weatherData, mapData]);
+      setHourlyData([weatherData, mapData]);
+      setDailyData([weatherData, mapData]);
       
     } catch (err) {
       setError(err.message || "Unknown error");
@@ -40,5 +46,5 @@ export default function useWeather(weatherApi, mapApi) {
     }
   });
 
-  return { data, loading, error, fetchByCity };
+  return { todayData, hourlyData, dailyData, loading, error, fetchByCity };
 }
