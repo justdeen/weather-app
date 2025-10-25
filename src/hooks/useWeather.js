@@ -1,5 +1,5 @@
 // src/hooks/useWeather.js
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const BASE = "https://api.weatherapi.com/v1/forecast.json"; // current weather endpoint
 
@@ -25,10 +25,10 @@ export default function useWeather(weatherApi, mapApi) {
         throw new Error("Failed to fetch");
       }
       const weatherData = await res.json();
-      
+
       let lat = weatherData.location.lat
       let lon = weatherData.location.lon
-      
+
       let res2 = await fetch(`https://api.mapbox.com/search/geocode/v6/reverse?longitude=${lon}&latitude=${lat}&access_token=${mapApi}`);
       if (!res2.ok) {
         if (res2.status === 404) throw new Error("City not found");
@@ -38,7 +38,7 @@ export default function useWeather(weatherApi, mapApi) {
       setTodayData([weatherData, mapData]);
       setHourlyData([weatherData, mapData]);
       setDailyData([weatherData, mapData]);
-      
+
     } catch (err) {
       setError(err.message || "Unknown error");
     } finally {

@@ -19,7 +19,7 @@ export default function Hourly({weather}) {
               <p className="card-text" style={{ fontWeight: '600', marginTop: '10px', fontSize: '12px' }}>
                 <span>{hourData.chance_of_rain}% 💧 &nbsp; &nbsp;</span>
                 <span>{hourData.chance_of_snow}% ❄️ &nbsp; &nbsp;</span>
-                <span>{hourData.temp_c}°C 🌡️ &nbsp; &nbsp;</span>
+                <span>{Math.floor(hourData.temp_c)}°C 🌡️ &nbsp; &nbsp;</span>
                 <span>{hourData.wind_kph} kph 💨</span>
               </p>
             </div>

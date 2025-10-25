@@ -16,7 +16,7 @@ export default function Daily({ weather }) {
               <p className="card-text" style={{ fontWeight: '600', marginTop: '10px', fontSize: '12px' }}>
                 <span>{e.day.daily_chance_of_rain}% 💧 &nbsp; &nbsp;</span>
                 <span>{e.day.daily_chance_of_snow}% ❄️ &nbsp; &nbsp;</span>
-                <span>{(e.day.maxtemp_c + e.day.mintemp_c)/2}°C 🌡️</span>
+                <span>{Math.floor((e.day.maxtemp_c + e.day.mintemp_c)/2)}°C 🌡️</span>
               </p>
             </div>
           </div>
