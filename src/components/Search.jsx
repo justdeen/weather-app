@@ -51,8 +51,8 @@ export default function App({navElements}) {
     }
     navigator.geolocation.getCurrentPosition(success, denied, {
       enableHighAccuracy: false, 
-      timeout: 3000, 
-      maximumAge: 5000,
+      // timeout: 3000, 
+      // maximumAge: 5000,
     });
 
     async function success(position) {
