@@ -51,7 +51,7 @@ export default function App({navElements}) {
     }
     navigator.geolocation.getCurrentPosition(success, denied, {
       enableHighAccuracy: false, 
-      timeout: 2000, 
+      timeout: 5000, 
       maximumAge: 5000,
     });
     async function success(position) {
@@ -67,6 +67,7 @@ export default function App({navElements}) {
       if (e.code === 3) {
         setUserError('Location request timed out.')
       } else setUserError("Location is off or blocked. Enable it in your browser settings.");
+      setCity('')
     }
   };
 
