@@ -52,7 +52,7 @@ export default function App({navElements}) {
     navigator.geolocation.getCurrentPosition(success, denied, {
       enableHighAccuracy: false, 
       timeout: 3000, 
-      maximumAge: 100000,
+      // maximumAge: 100000,
     });
 
     async function success(position) {
