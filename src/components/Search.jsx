@@ -16,16 +16,12 @@ export default function App({navElements}) {
   const [city, setCity] = useState("");
   const [userError, setUserError] = useState(null);
   const [userCity, setUserCity] = useState("");
-  const { todayData, hourlyData, dailyData, loading, error, fetchByCity } = useWeather(WEATHER_API_KEY, MAP_API_KEY);
+  const { todayData, hourlyData, dailyData, loading, setLoading, error, fetchByCity } = useWeather(WEATHER_API_KEY, MAP_API_KEY);
 
   useEffect(() => {
     setUserError(null)
     if (!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(success, denied, {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    });
+    navigator.geolocation.getCurrentPosition(success, denied);
     async function success(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
@@ -47,16 +43,13 @@ export default function App({navElements}) {
     setCity("");
   };
   const userLocation = () => {
+    setLoading(true);
     setUserError(null)
     if (!navigator.geolocation) {
     alert("Geolocation is not supported by your browser.");
     return;
     }
-    navigator.geolocation.getCurrentPosition(success, denied, {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    });
+    navigator.geolocation.getCurrentPosition(success, denied);
 
     async function success(position) {
         const lat = position.coords.latitude;

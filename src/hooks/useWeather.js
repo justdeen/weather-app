@@ -46,5 +46,5 @@ export default function useWeather(weatherApi, mapApi) {
     }
   });
 
-  return { todayData, hourlyData, dailyData, loading, error, fetchByCity };
+  return { todayData, hourlyData, dailyData, loading, setLoading, error, fetchByCity };
 }
