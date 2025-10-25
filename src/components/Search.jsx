@@ -51,10 +51,9 @@ export default function App({navElements}) {
     }
     navigator.geolocation.getCurrentPosition(success, denied, {
       enableHighAccuracy: false, 
-      // timeout: 3000, 
-      // maximumAge: 5000,
+      timeout: 2000, 
+      maximumAge: 5000,
     });
-
     async function success(position) {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
@@ -63,8 +62,11 @@ export default function App({navElements}) {
       setUserCity(data.location.name);
       if (userCity) fetchByCity(userCity);
     }
-    function denied() {
-      setUserError("Location is off or blocked. Enable it in your browser settings.");
+    function denied(e) {
+      setLoading(false);
+      if (e.code === 3) {
+        setUserError('Location request timed out.')
+      } else setUserError("Location is off or blocked. Enable it in your browser settings.");
     }
   };
 
