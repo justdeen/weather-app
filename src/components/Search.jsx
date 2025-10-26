@@ -19,20 +19,19 @@ export default function App({navElements}) {
   const {todayData, hourlyData, dailyData, loading, setLoading, error, fetchByCity} = useWeather(WEATHER_API_KEY, MAP_API_KEY);
 
   useEffect(() => {
-    setUserError(null);
-    if (!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(success, denied);
-    async function success(position) {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      const res = await fetch(`${BASE}?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
-      const data = await res.json();
-      setUserCity(data.location.name);
-      if (userCity) fetchByCity(userCity);
-    }
-    function denied() {
-      // setUserError("Location is off or blocked. Enable it in your browser settings.")
-    }
+    // setUserError(null);
+    // navigator.geolocation.getCurrentPosition(success, denied);
+    // async function success(position) {
+    //   const lat = position.coords.latitude;
+    //   const lon = position.coords.longitude;
+    //   const res = await fetch(`${BASE}?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
+    //   const data = await res.json();
+    //   setUserCity(data.location.name);
+    //   if (userCity) fetchByCity(userCity);
+    // }
+    // function denied() {
+    //   // setUserError("Location is off or blocked. Enable it in your browser settings.")
+    // }
   }, []);
 
   const onSearch = (e) => {
@@ -46,22 +45,23 @@ export default function App({navElements}) {
     setLoading(true);
     setUserError(null);
     
-    async function getUserLocation() {
-      navigator.geolocation.getCurrentPosition(success, denied, {
+    navigator.geolocation.getCurrentPosition(success, denied, {
         enableHighAccuracy: false,
         timeout: 5000,
         maximumAge: 5000,
       });
-    }
+    
     async function success(position) {
-      if(position.coords.latitude) alert('coordinates data exists')
+      // if(position.coords.latitude) alert(`${position.coords.latitude}, ${position.coords.longitude}`)
       // setLoading(true)
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       const res = await fetch(`${BASE}?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
       const data = await res.json();
-      setUserCity(data.location.name);
-      if (userCity) fetchByCity(userCity);
+      // setUserCity(data.location.name);
+      // console.log(data.location.name)
+      // if (userCity) fetchByCity(userCity);
+      fetchByCity(data.location.name)
     }
     function denied(e) {
       setLoading(false);
@@ -70,7 +70,6 @@ export default function App({navElements}) {
       } else setUserError("Location is off or blocked. Enable it in your phone and browser settings.");
       setCity("");
     }
-    setTimeout(getUserLocation, 2000);
   };
 
   return (
