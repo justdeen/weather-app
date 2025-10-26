@@ -57,7 +57,10 @@ export default function App({navElements}) {
           setLoading(false);
           setUserError("Location request timed out. Please try again later.");
         }
-      } else setUserError("Location is off or blocked. Enable it in your phone and browser settings.");
+      } else { 
+        setLoading(false);
+        setUserError("Location is off or blocked. Enable it in your phone and browser settings.");
+      } 
     }
   };
 
