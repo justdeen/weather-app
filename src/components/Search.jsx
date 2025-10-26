@@ -47,32 +47,32 @@ export default function App({navElements}) {
     setUserError(null);
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser.");
+      setLoading(false)
       return;
     }
-    try {
+    function getUserLocation() {
       navigator.geolocation.getCurrentPosition(success, denied, {
         enableHighAccuracy: false,
         timeout: 5000,
         maximumAge: 5000,
       });
-      async function success(position) {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        const res = await fetch(`${BASE}?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
-        const data = await res.json();
-        setUserCity(data.location.name);
-        if (userCity) fetchByCity(userCity);
-      }
-      function denied(e) {
-        setLoading(false);
-        if (e.code === 3) {
-          setUserError("Location request timed out.");
-        } else setUserError("Location is off or blocked. Enable it in your browser settings.");
-        setCity("");
-      }
-    } finally {
-      setLoading(false);
     }
+    async function success(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const res = await fetch(`${BASE}?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
+      const data = await res.json();
+      setUserCity(data.location.name);
+      if (userCity) fetchByCity(userCity);
+    }
+    function denied(e) {
+      setLoading(false);
+      if (e.code === 3) {
+        setUserError("Location request timed out. Please try again!");
+      } else setUserError("Location is off or blocked. Enable it in your phone and browser settings.");
+      setCity("");
+    }
+    setTimeout(getUserLocation, 2000);
   };
 
   return (
