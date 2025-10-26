@@ -15,24 +15,7 @@ const BASE = "https://api.weatherapi.com/v1/forecast.json";
 export default function App({navElements}) {
   const [city, setCity] = useState("");
   const [userError, setUserError] = useState(null);
-  const [userCity, setUserCity] = useState("");
   const {todayData, hourlyData, dailyData, loading, setLoading, error, fetchByCity} = useWeather(WEATHER_API_KEY, MAP_API_KEY);
-
-  useEffect(() => {
-    // setUserError(null);
-    // navigator.geolocation.getCurrentPosition(success, denied);
-    // async function success(position) {
-    //   const lat = position.coords.latitude;
-    //   const lon = position.coords.longitude;
-    //   const res = await fetch(`${BASE}?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
-    //   const data = await res.json();
-    //   setUserCity(data.location.name);
-    //   if (userCity) fetchByCity(userCity);
-    // }
-    // function denied() {
-    //   // setUserError("Location is off or blocked. Enable it in your browser settings.")
-    // }
-  }, []);
 
   const onSearch = (e) => {
     setUserError(null);
@@ -52,23 +35,29 @@ export default function App({navElements}) {
       });
     
     async function success(position) {
-      // if(position.coords.latitude) alert(`${position.coords.latitude}, ${position.coords.longitude}`)
-      // setLoading(true)
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       const res = await fetch(`${BASE}?key=${WEATHER_API_KEY}&q=${lat},${lon}`);
       const data = await res.json();
-      // setUserCity(data.location.name);
-      // console.log(data.location.name)
-      // if (userCity) fetchByCity(userCity);
       fetchByCity(data.location.name)
     }
+
+    let count = 1
     function denied(e) {
-      setLoading(false);
+      // setLoading(false);
       if (e.code === 3) {
-        setUserError("Location request timed out. Please try again!");
+        if (count < 2) {
+          count++;
+          navigator.geolocation.getCurrentPosition(success, denied, {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 5000,
+          });
+        } else {
+          setLoading(false);
+          setUserError("Location request timed out. Please try again later.");
+        }
       } else setUserError("Location is off or blocked. Enable it in your phone and browser settings.");
-      setCity("");
     }
   };
 
